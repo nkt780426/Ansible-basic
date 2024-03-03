@@ -1,0 +1,5 @@
+- name: Install mariadb server package
+  tags: db, mariadb
+  package:
+    name: "{{ mariadb_service }}"
+    state: latest

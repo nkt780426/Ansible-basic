@@ -1,0 +1,42 @@
+- name: Install apache2 and php packages
+  tags: apache, apache2, httpd, php
+  package:
+    name: 
+      - "{{ apache_package_name }}"
+      - "{{ php_package_name }}"
+    state: latest
+
+- name: Start httpd
+  tags: apache, apache2, centos, httpd
+  service:
+    name: "{{ apache_service }}"
+    state: started
+    enabled: yes
+
+- name: Add port 80 to the firewall
+  tags: firewall, centos, httpd
+  firewalld:
+    port: 80/tcp
+    permanent: yes
+    state: enabled
+    immediate: yes
+  notify: Reload Firewalld
+  when: ansible_distribution == "CentOS"
+
+- name: change e-mail address for admin
+  tags: apache, centos, httpd
+  lineinfile:
+    path: /etc/httpd/conf/httpd.conf
+    regexp: '^ServerAdmin'
+    line: ServerAdmin somebody@somewhere.com
+  when: ansible_distribution == "CentOS"
+  notify: restart_apache
+
+- name: copy default html file for site
+  tags: apache, apache2, httpd
+  copy:
+    src: default_site.html
+    dest: /var/www/html/index.html
+    owner: root
+    group: root
+    mode: 0644
