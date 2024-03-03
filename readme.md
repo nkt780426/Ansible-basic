@@ -1,4 +1,4 @@
-#SETUP ENVIRONMENT
+# SETUP ENVIRONMENT
 1. Set up an Ubuntu host for your workstation, along with 3 Ubuntu hosts and 1 CentOS 9 host for Ansible remote hosts. If you lack physical hosts, you can use [Oracle VM virtualbox](https://www.virtualbox.org/) to create virtual host. Refer to this link to build virtual host: [ubuntu host](https://www.youtube.com/watch?v=ElNalqvVaPw&t=1081s) and follow similar steps for the centos host
 **Note**: 
 *- If your workstation isn't ubuntu, you can either [install wsl2 with distro Ubuntu](https://learn.microsoft.com/en-us/windows/wsl/install) or add an ubuntu host in VM box*
@@ -31,7 +31,7 @@ ssh <host's ip>
 # Ping đến các host
 ansible all -m ping
 ```
-#RUN PLAYBOOK
+# RUN PLAYBOOK
 1. Run bootstrap.yml playbook. What can this playbook do ?
 - Updates and Upgrades all package on all hosts and workstation
 - Create a new user named *simone* on each hosts with root privilege and no password
@@ -58,5 +58,5 @@ ansible site.yml
 4. Check result:
 - Access the webserver's address in a browser to view the static HTML file.
 - Run terraform --version on the workstation host to verify the installation.
-#Contributions
+# Contributions
 If you wish to contribute or report an issue,, kindly create an issue or submit a pull request. Your involvement is greatly appreciated!
